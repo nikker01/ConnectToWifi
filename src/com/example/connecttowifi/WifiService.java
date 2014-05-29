@@ -69,7 +69,7 @@ public class WifiService extends Service {
 			Log.i("WifiReceiver", "onReceive BEGIN");
 			List<ScanResult> result_list = wifiManager.getScanResults();
 			for (ScanResult result : result_list) {
-				if (result.SSID.equals("NBG4104")) {
+				if (result.SSID.equals("DS-AP5")) {
 					Log.i("WifiReceiver", "ApDetected");
 
 					//generate Notification 
@@ -85,7 +85,7 @@ public class WifiService extends Service {
 							ResultActivity.class);
 					PendingIntent resultPendingIntent = PendingIntent
 							.getActivity(mContext, 0, resultIntent,
-									PendingIntent.FLAG_UPDATE_CURRENT);
+									PendingIntent.FLAG_CANCEL_CURRENT);
 					mBuilder.setContentIntent(resultPendingIntent);
 
 					NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);

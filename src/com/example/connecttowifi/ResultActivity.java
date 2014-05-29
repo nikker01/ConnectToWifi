@@ -16,12 +16,15 @@ import android.util.Log;
 
 public class ResultActivity extends Activity {
 
-	private String apName = "NBG4104";
+	private String mApName = "DS-AP5";
+	private String mApPwd = "66c2fb5951";
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		
+		Log.i("ResultActivity", "onCreate BEGIN");
 		
 		showConnectDialog();
 	}
@@ -30,7 +33,7 @@ public class ResultActivity extends Activity {
 		// TODO Auto-generated method stub
 		Builder alertDialog = new AlertDialog.Builder(this);
 		alertDialog.setTitle("");
-		alertDialog.setMessage("Connect to this AP:" +apName);
+		alertDialog.setMessage("Connect to this AP:" +mApName);
 		alertDialog.setPositiveButton("OK",
 				new DialogInterface.OnClickListener() {
 					@Override
@@ -57,15 +60,15 @@ public class ResultActivity extends Activity {
 		Log.i("ResultActivity", "connectToAp BEGIN");
 		
 		WifiConfiguration conf = new WifiConfiguration();
-		conf.SSID = "\"" + "NBG4104" + "\"";
-		conf.preSharedKey = "\"" + "11111111" + "\"";
+		conf.SSID = "\"" + mApName + "\"";
+		conf.preSharedKey = "\"" + mApPwd + "\"";
 		
 		WifiManager wiFiManager = (WifiManager) getSystemService(Context.WIFI_SERVICE);
 		wiFiManager.addNetwork(conf);
 		List<WifiConfiguration> list = wiFiManager.getConfiguredNetworks();
 		if (list != null) {
 			for (WifiConfiguration i : list) {
-				if (i.SSID != null && i.SSID.equals("\"" + "NBG4104" + "\"")) {
+				if (i.SSID != null && i.SSID.equals("\"" + mApName + "\"")) {
 					wiFiManager.enableNetwork(i.networkId, true);
 					Log.i("ResultActivity", "reconnect wifi " + wiFiManager.reassociate());
 				}
